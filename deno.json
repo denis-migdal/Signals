@@ -1,0 +1,9 @@
+{
+    "tasks": {
+        "test": "deno test ./tests/**/*.ts
+                --allow-all
+                --unstable-sloppy-imports
+                --unstable-node-globals",
+        "bench": "deno bench ./benchmarks/**/*.ts"
+    }
+}
