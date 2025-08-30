@@ -4,6 +4,7 @@
                 --allow-all
                 --unstable-sloppy-imports
                 --unstable-node-globals",
-        "bench": "deno bench ./benchmarks/**/*.ts"
+        "bench": "deno bench ./benchmarks/**/*.ts
+                --unstable-sloppy-imports"
     }
 }

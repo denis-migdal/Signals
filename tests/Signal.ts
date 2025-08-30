@@ -1,22 +1,14 @@
 import {it, describe} from "jsr:@std/testing/bdd";
 import { assert } from "jsr:@std/assert";
 
-const tests = describe("initial", {
+import Signal         from "../src/Signal";
+
+const tests = describe("EventListener", {
                             sanitizeResources: false,
                             sanitizeOps      : false
                     }); // beforeAll / afterAll
 
-it(tests, "initial", async () => {
-    //TEST.
-    assert(true);
-});
+it(tests, "simple signal", async () => {
 
-it(tests, "initial2", async () => {
-    //TEST.
-    assert(false);
-});
-
-it(tests, "initial3", async () => {
-    //TEST.
-    assert(false);
+    new Signal();
 });
