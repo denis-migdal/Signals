@@ -6,9 +6,6 @@ import EventListener from "../src/EventListener";
 import L_Event         from "../src/legacy/SignalEvent";
 import L_EventListener from "../src/legacy/SignalEventListener";
 
-// setup   x3.1  faster
-// trigger x1.92 faster (well some verif not made yet...)
-
 Deno.bench("Signal",
           { group: "EventChain (setup)", baseline: true },
           async () => {

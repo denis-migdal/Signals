@@ -1,22 +1,50 @@
-import Event from "./Event"
+import {default as ROSignal, SignalCallback} from "./ROSignal";
 
-export default class Signal<IN, OUT> extends Event {
+export default class Signal<T> extends ROSignal<T> {
 
-    //TODO: trigger if source change, only if valueIsKnown && diff from previous...
+    #internalValue: T|null = null;
+    #hasValue     : boolean = false;
 
-    #value: OUT|null = null; // undefined for unknown ? OR value status ?
-    get value() {
-        //TODO: compute if value is not known...
-        return this.#value;
+    override get value(): T|null {
+        if( this.parent === null)
+            return this.#internalValue;
+        return this.parent.value;
     }
-    // value (get/set)
-    // input (set)
-    // transform (or another class ?)
-    /*
-    override get source(): Signal<any, IN>|null {
-        return super.source as Signal<any, IN>;
-    }/*
-    override set source(src: Signal<any, IN>|null) {
-        super.source = src;
-    }*/
+
+    override get hasValue() {
+        if( this.parent === null)
+            return this.#hasValue;
+        return this.parent.hasValue;
+    }
+
+    //TODO inputSource (null/src)
+    set inputSource(src: Signal<T>|null) {
+
+        /*if( this.notifyInProgress === true )
+            throw new Error('Behavior Not Well Defined: setting input when root.notifyInProgress.');*/
+
+        const hadValue = this.hasValue;
+
+        this.setParent(src);
+        this.#internalValue = null;
+
+        // no need to trigger during setup.
+        if( hadValue === false && this.hasValue === false )
+            return;
+
+        this.trigger();
+    }
+
+    set inputValue(value: T) {
+
+        /*if( this.notifyInProgress === true )
+            throw new Error('Behavior Not Well Defined: setting input when root.notifyInProgress.');*/
+
+        if( this.parent !== null)
+            this.setParent(null);
+
+        this.#internalValue = value;
+        this.#hasValue      = true;
+        this.trigger();
+    }
 }
