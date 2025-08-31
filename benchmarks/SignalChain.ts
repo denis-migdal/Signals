@@ -2,11 +2,12 @@ import S_Signal  from "../src/Signal";
 import L_Signal  from "../src/legacy/Signal";
 
 // simple setup
-    // -> 1.19x faster
+    // -> 1.13x faster
     // -> 1.26x faster
-// Setup       : 1.12x (reversed is 1.23x faster).
-// Trigger+read: 6.41x [le + important]
-// Valeur      : 1.72x (access from .value : 3.12x slower).
+// Setup       : 1.09x (reversed is 1.26x faster).
+// Trigger+read: x7.38
+//         prev/nextCallbacks ~15x [le + important]
+// Valeur      : 2.35x (access from .value : 3.12x slower).
 
 const N = 40;
 
