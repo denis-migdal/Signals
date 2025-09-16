@@ -3,6 +3,10 @@ Lightweight signal libs used as dependancies for my projects.
 
 ## Signals
 
+## Not Well Defined Behavior
+
+Some operations on signals during trigger propagation may lead to undefined behavior.
+
 ## Events
 
 ```ts
