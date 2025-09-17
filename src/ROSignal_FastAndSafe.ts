@@ -35,7 +35,7 @@ export default abstract class ROSignal<T> {
             parent : this
         }
 
-        //TODO: if root.cur !== null -> delay
+        //TODO: is during a trigger... - store root ?
 
         // update self callbacks (no needs for saves)
         if( this.selfLastCallback === null )
@@ -59,16 +59,12 @@ export default abstract class ROSignal<T> {
                     callbackNode!.next.prev = callbackNode;
             }
 
-            //TODO: propagate firstRoot
-
         } else {
 
             callbackNode.prev = this.rootLastCallback;
             callbackNode.next = this.rootLastCallback.next;
             this.rootLastCallback = this.rootLastCallback.next = callbackNode;
 
-            //TODO: update ancestors
-            throw new Error("not implemented !");
         }
 
         // update ancestors rootLastCallback
@@ -105,16 +101,17 @@ export default abstract class ROSignal<T> {
     // trigger
 
     private curCallback: CallbackNode<T>|null = null;
-    protected trigger() {
+    protected trigger() { // should be protected against re-entry.
 
-        // no callback to call.
-        if( this.rootFirstCallback === null )
+        if( this.rootFirstCallback === null) // no callbacks.
             return;
 
         this.curCallback = this.rootFirstCallback;
+        this.curCallback!.content(this); // initial call.
+
         while( this.curCallback !== this.rootLastCallback ) {
-            this.curCallback!.content(this);
             this.curCallback = this.curCallback!.next;
+            this.curCallback!.content(this);
         }
 
         return this;

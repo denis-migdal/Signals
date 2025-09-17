@@ -3,9 +3,13 @@ Lightweight signal libs used as dependancies for my projects.
 
 ## Signals
 
-## Not Well Defined Behavior
+Following behaviors may not be properly implemented yet:
 
-Some operations on signals during trigger propagation may lead to undefined behavior.
+- [X] .trigger() should be protected against re-entry.
+- [ ] removing source/listener should prevent listeners calls even if during trigger.
+- [ ] adding listener should trigger in the NEXT event (as it will be called once due to initial).
+- [ ] adding source should not cause issue as previous trigger should have been canceled.
+
 
 ## Events
 

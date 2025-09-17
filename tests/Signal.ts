@@ -8,7 +8,7 @@ const tests = describe("Signal", {
                             sanitizeOps      : false
                     }); // beforeAll / afterAll
 
-it(tests, "initial call", async () => {
+it(tests, "initial call", () => {
 
     const signal = new Signal();
 
@@ -21,7 +21,7 @@ it(tests, "initial call", async () => {
     assert(count === 1);
 });
 
-it(tests, "get value", async () => {
+it(tests, "get value", () => {
 
     let value = 0;
 
@@ -36,7 +36,7 @@ it(tests, "get value", async () => {
 });
 
 
-it(tests, "get value", async () => {
+it(tests, "get value", () => {
 
     let value = 0;
 
@@ -53,7 +53,7 @@ it(tests, "get value", async () => {
     assert(value === 2);
 });
 
-it(tests, "not trigger if no values", async () => {
+it(tests, "not trigger if no values", () => {
 
     let count = 0;
 
